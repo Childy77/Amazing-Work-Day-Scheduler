@@ -2,7 +2,16 @@
 // the code isn't run until the browser has finished rendering all the elements
 // in the html.
 var timeDisplayEl = $("#currentDay");
-
+var hours9 = $("#hour-9");
+var hours10 = $("#hour-10");
+var hours11 = $("#hour-11");
+var hours12 = $("#hour-12");
+var hours1 = $("#hour-1");
+var hours2 = $("#hour-2");
+var hours3 = $("#hour-3");
+var hours4 = $("#hour-4");
+var hours5 = $("#hour-5");
+var hoursArray = [hours9, hours10, hours11, hours12, hours1, hours2, hours3, hours4, hours5];
 
 // var dayOfWeek = new Array(7);
 // dayOfWeek[0]="Sunday";
@@ -18,6 +27,24 @@ function displayTime() {
   timeDisplayEl.text(rightNow);
 }
 
+function checkTime() {
+  var TheHour = dayjs().format("hh A");
+ for (let index = 0; index < hoursArray.length; index++) {
+  const element = hoursArray[index];
+
+  console.log(element);
+  
+ }
+ 
+  if (TheHour) {
+
+  }
+    
+
+
+} 
+// console.log(TheHour);
+checkTime();
 displayTime();
 setInterval(displayTime, 1000);
 
