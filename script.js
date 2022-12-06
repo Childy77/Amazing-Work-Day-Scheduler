@@ -1,15 +1,25 @@
 // Wrap all code that interacts with the DOM in a call to jQuery to ensure that
 // the code isn't run until the browser has finished rendering all the elements
 // in the html.
+var timeDisplayEl = $("#currentDay");
 
-var dayOfWeek = new Array(7);
-dayOfWeek[0]="Sunday";
-dayOfWeek[1]="Monday";
-dayOfWeek[2]="Tuesday";
-dayOfWeek[3]="Wednesday";
-dayOfWeek[4]="Thursday";
-dayOfWeek[5]="Friday";
-dayOfWeek[6]="Saturday";
+
+// var dayOfWeek = new Array(7);
+// dayOfWeek[0]="Sunday";
+// dayOfWeek[1]="Monday";
+// dayOfWeek[2]="Tuesday";
+// dayOfWeek[3]="Wednesday";
+// dayOfWeek[4]="Thursday";
+// dayOfWeek[5]="Friday";
+// dayOfWeek[6]="Saturday";
+
+function displayTime() {
+  var rightNow = dayjs().format('MMM DD, YYYY [at] hh:mm:ss a');
+  timeDisplayEl.text(rightNow);
+}
+
+displayTime();
+setInterval(displayTime, 1000);
 
 $(function () {
   // TODO: Add a listener for click events on the save button. This code should
