@@ -2,6 +2,10 @@
 // the code isn't run until the browser has finished rendering all the elements
 // in the html.
 var timeDisplayEl = $("#currentDay");
+var events = "";
+// var saveBtn = $(".saveBtn");
+var field 
+var content
 var hours9 = $("#hour-9");
 var hours10 = $("#hour-10");
 var hours11 = $("#hour-11");
@@ -13,40 +17,72 @@ var hours4 = $("#hour-4");
 var hours5 = $("#hour-5");
 var hoursArray = [hours9, hours10, hours11, hours12, hours1, hours2, hours3, hours4, hours5];
 
-// var dayOfWeek = new Array(7);
-// dayOfWeek[0]="Sunday";
-// dayOfWeek[1]="Monday";
-// dayOfWeek[2]="Tuesday";
-// dayOfWeek[3]="Wednesday";
-// dayOfWeek[4]="Thursday";
-// dayOfWeek[5]="Friday";
-// dayOfWeek[6]="Saturday";
+
 
 function displayTime() {
   var rightNow = dayjs().format('MMM DD, YYYY [at] hh:mm:ss a');
   timeDisplayEl.text(rightNow);
 }
 
-function checkTime() {
-  var TheHour = dayjs().format("hh A");
- for (let index = 0; index < hoursArray.length; index++) {
-  const element = hoursArray[index];
 
-  console.log(element);
-  
- }
- 
-  if (TheHour) {
 
+$(".saveBtn").click(saveProjectsToStorage)
+
+
+
+
+function readProjectsFromStorage() {
+  var storageEvents = localStorage.getItem(storageEvents);
+  if (storageEvents) {
+    console.log(storageEvents);
+    events = JSON.parse(storageEvents);
+  } else {
+    events = [];
   }
+  return events;
+}
+
+function saveProjectsToStorage() {
+  buttonId = this.id
+  fieldId = buttonId + "field"
+  content = JSON.stringify($("#" + field).val())
+  localStorage.setItem(field, content)
+}
+
+// function saveProjectsToStorage() {
+//   field = this.id
+//   console.log(field);
+//   content = $(field).val();
+//   console.log(content)
+//   localStorage.setItem(field, JSON.stringify(content));
+// }
+
+
+
+
+// function checkTime() {
+//   var TheHour = dayjs().format("hh A");
+//  for (let index = 0; index < hoursArray.length; index++) {
+//   const element = hoursArray[index];
+
+//   console.log(element);
+  
+//  }
+ 
+//   if (TheHour) {
+
+//   }
     
 
 
-} 
+// } 
 // console.log(TheHour);
-checkTime();
+// checkTime();
+
 displayTime();
 setInterval(displayTime, 1000);
+// readProjectsFromStorage();
+
 
 $(function () {
   // TODO: Add a listener for click events on the save button. This code should
