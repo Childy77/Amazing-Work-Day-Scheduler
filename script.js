@@ -32,56 +32,64 @@ $(".saveBtn").click(saveProjectsToStorage)
 
 
 function readProjectsFromStorage() {
-  var storageEvents = localStorage.getItem(storageEvents);
-  if (storageEvents) {
-    console.log(storageEvents);
-    events = JSON.parse(storageEvents);
-  } else {
-    events = [];
+  var hourlyEvents = Object.keys(localStorage);
+  for (let index = 0; index < hourlyEvents.length; index++) {
+    const oneEvent = hourlyEvents[index];
+    
+    var storageEvent = localStorage.getItem(oneEvent);
+    
+    $("#" + oneEvent).val(storageEvent);
+    
   }
-  return events;
+  
+  
 }
 
 function saveProjectsToStorage() {
   buttonId = this.id
   fieldId = buttonId + "field"
-  content = JSON.stringify($("#" + field).val())
-  localStorage.setItem(field, content)
+  content = $("#" + fieldId).val()
+  localStorage.setItem(fieldId, content)
 }
 
-// function saveProjectsToStorage() {
-//   field = this.id
-//   console.log(field);
-//   content = $(field).val();
-//   console.log(content)
-//   localStorage.setItem(field, JSON.stringify(content));
-// }
 
 
 
 
-// function checkTime() {
-//   var TheHour = dayjs().format("hh A");
-//  for (let index = 0; index < hoursArray.length; index++) {
-//   const element = hoursArray[index];
 
-//   console.log(element);
+function checkTime() {
   
-//  }
- 
-//   if (TheHour) {
+ for (let index = 9; index < 18; index++) {
+  let amPmTime = index;
+if (index > 12) {
+  amPmTime = index - 12
+}
+let timeClass = "future"
 
-//   }
+if (dayjs().isSame(dayjs().hour(index), 'hour')) {
+  timeClass = "present"
+}
+else if (dayjs().isBefore(dayjs().hour(index), 'hour')) {
+  timeClass = "past"
+}
+
+$("#hour-" + amPmTime).addClass(timeClass);
+  
+
+  console.log(amPmTime);
+
+  
+ }
+
     
 
 
-// } 
-// console.log(TheHour);
-// checkTime();
+} 
+checkTime();
 
 displayTime();
 setInterval(displayTime, 1000);
-// readProjectsFromStorage();
+readProjectsFromStorage();
 
 
 $(function () {
